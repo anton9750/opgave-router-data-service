@@ -1,0 +1,18 @@
+generator client {
+  provider = "prisma-client-js" // Standard provider
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id        Int    @id @default(autoincrement())
+  firstname String
+}
+
+model Car {
+  id    Int    @id @default(autoincrement())
+  model String
+  brand String?
+}

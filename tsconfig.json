@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "target": "esnext",
+    "strict": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    
+    // Vigtige indstillinger for ts-node + ESM:
+    "allowImportingTsExtensions": true,
+    "noEmit": true
+  },
+  // Krav fra punkt 3 i opgaven:
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist", "prisma.config.ts"],
+  
+  "ts-node": {
+    "esm": true
+  }
+}
