@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client-js" // Standard provider
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -13,6 +13,20 @@ model User {
 
 model Car {
   id    Int    @id @default(autoincrement())
+  brand String
   model String
-  brand String?
+  price Float
+}
+
+// 🟢 NY MODEL: Category
+model Category {
+  id   Int    @id @default(autoincrement())
+  name String
+}
+
+// 🟢 NY MODEL: Brand
+model Brand {
+  id   Int    @id @default(autoincrement())
+  name String
+  logo String // Tekststreng til f.eks. en URL eller filsti til et logo-billede
 }

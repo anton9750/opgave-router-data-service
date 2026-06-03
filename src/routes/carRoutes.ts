@@ -1,10 +1,13 @@
+// src/routes/carRoutes.ts
 import { Router } from "express";
-// Import the car controller with the exact .ts file extension matching your runtime config
 import { carController } from '../controllers/carController.ts';
 
 const routes = Router();
 
-// Route that forwards requests directly into the database controller method
+// Hent alle biler (GET)
 routes.get("/", carController.getRecords);
+
+// 🟢 Opret en ny bil (POST)
+routes.post("/", carController.createRecord);
 
 export const carRoutes = routes;
