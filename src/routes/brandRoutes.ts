@@ -1,4 +1,3 @@
-// src/routes/brandRoutes.ts
 import { Router } from "express";
 import { brandController } from "../controllers/brandController.ts";
 

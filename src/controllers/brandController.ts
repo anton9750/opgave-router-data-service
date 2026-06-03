@@ -1,9 +1,7 @@
-// src/controllers/brandController.ts
 import type { Request, Response } from "express";
 import { prisma } from "../prisma.ts";
 
 class BrandController {
-  // CREATE
   createRecord = async (req: Request, res: Response) => {
     try {
       const { name, logo } = req.body;
@@ -11,12 +9,12 @@ class BrandController {
 
       const newBrand = await prisma.brand.create({ data: { name, logo } });
       return res.status(201).json(newBrand);
-    } catch (error) {
-      return res.status(500).json({ error: "Kunne ikke oprette brand" });
+    } catch (error: any) {
+      console.error("Create brand error:", error);
+      return res.status(500).json({ error: error.message || "Kunne ikke oprette brand" });
     }
   };
 
-  // READ (Alle - Sorteret alfabetisk)
   getRecords = async (req: Request, res: Response) => {
     try {
       const brands = await prisma.brand.findMany({
@@ -28,7 +26,6 @@ class BrandController {
     }
   };
 
-  // READ (Enkelt ud fra ID)
   getRecord = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
@@ -42,7 +39,6 @@ class BrandController {
     }
   };
 
-  // UPDATE
   updateRecord = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
@@ -58,7 +54,6 @@ class BrandController {
     }
   };
 
-  // DELETE
   deleteRecord = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;

@@ -18,15 +18,13 @@ model Car {
   price Float
 }
 
-// 🟢 NY MODEL: Category
 model Category {
   id   Int    @id @default(autoincrement())
-  name String
+  name String @unique
 }
 
-// 🟢 NY MODEL: Brand
 model Brand {
   id   Int    @id @default(autoincrement())
-  name String
-  logo String // Tekststreng til f.eks. en URL eller filsti til et logo-billede
+  name String @unique
+  logo String
 }

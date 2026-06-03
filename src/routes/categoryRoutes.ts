@@ -1,4 +1,3 @@
-// src/routes/categoryRoutes.ts
 import { Router } from "express";
 import { categoryController } from "../controllers/categoryController.ts";
 

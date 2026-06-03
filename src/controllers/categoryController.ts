@@ -1,9 +1,7 @@
-// src/controllers/categoryController.ts
 import type { Request, Response } from "express";
 import { prisma } from "../prisma.ts";
 
 class CategoryController {
-  // CREATE
   createRecord = async (req: Request, res: Response) => {
     try {
       const { name } = req.body;
@@ -11,12 +9,12 @@ class CategoryController {
 
       const newCategory = await prisma.category.create({ data: { name } });
       return res.status(201).json(newCategory);
-    } catch (error) {
-      return res.status(500).json({ error: "Kunne ikke oprette kategori" });
+    } catch (error: any) {
+      console.error("Create category error:", error);
+      return res.status(500).json({ error: error.message || "Kunne ikke oprette kategori" });
     }
   };
 
-  // READ (Alle - Sorteret alfabetisk)
   getRecords = async (req: Request, res: Response) => {
     try {
       const categories = await prisma.category.findMany({
@@ -28,7 +26,6 @@ class CategoryController {
     }
   };
 
-  // READ (Enkelt ud fra ID)
   getRecord = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
@@ -42,7 +39,6 @@ class CategoryController {
     }
   };
 
-  // UPDATE
   updateRecord = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
@@ -58,7 +54,6 @@ class CategoryController {
     }
   };
 
-  // DELETE
   deleteRecord = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
