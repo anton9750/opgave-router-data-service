@@ -10,11 +10,11 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     
-    // Vigtige indstillinger for ts-node + ESM:
+
     "allowImportingTsExtensions": true,
     "noEmit": true
   },
-  // Krav fra punkt 3 i opgaven:
+
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "dist", "prisma.config.ts"],
   

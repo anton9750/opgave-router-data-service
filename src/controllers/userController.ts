@@ -1,8 +1,8 @@
 import type { Request, Response } from 'express';
-import { prisma } from '../prisma.ts'; // 🟢 Use .ts here too
+import { prisma } from '../prisma.ts'; 
 
 export const getRecords = async (req: Request, res: Response) => {
-  const data = await prisma.user.findMany({ // ✨ TypeScript will now see this too!
+  const data = await prisma.user.findMany({ 
     select: {
       id: true,
       firstname: true
