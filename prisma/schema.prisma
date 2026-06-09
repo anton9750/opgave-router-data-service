@@ -7,24 +7,41 @@ datasource db {
 }
 
 model User {
-  id        Int    @id @default(autoincrement())
-  firstname String
+  id        Int     @id @default(autoincrement())
+  fornavn   String
+  efternavn String
+  email     String  @unique
+  password  String
+  role      String  @default("user")
+  isActive  Boolean @default(true)
 }
 
+// 1. CAR MODEL (Nu med relationer)
 model Car {
-  id    Int    @id @default(autoincrement())
-  brand String
-  model String
-  price Float
+  id         Int      @id @default(autoincrement()) // Primærnøgle
+  model      String
+  price      Float
+  
+  // Fremmednøgler (Hvilket ID i brand/category kobles bilen til)
+  brandId    Int
+  categoryId Int
+
+  // Relationerne (Fortæller Prisma, hvordan de linker sammen)
+  brand      Brand    @relation(fields: [brandId], references: [id])
+  category   Category @relation(fields: [categoryId], references: [id])
 }
 
+// 2. CATEGORY MODEL (En kategori kan have mange biler)
 model Category {
-  id   Int    @id @default(autoincrement())
+  id   Int    @id @default(autoincrement()) // Primærnøgle
   name String @unique
+  cars Car[]  // Modsat rute af relationen
 }
 
+// 3. BRAND MODEL (Et brand kan have mange biler)
 model Brand {
-  id   Int    @id @default(autoincrement())
+  id   Int    @id @default(autoincrement()) // Primærnøgle
   name String @unique
   logo String
+  cars Car[]  // Modsat rute af relationen
 }

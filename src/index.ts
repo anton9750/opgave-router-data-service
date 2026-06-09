@@ -5,28 +5,32 @@ import dotenv from 'dotenv';
 import { indexRoutes } from './routes/indexRoutes.ts';
 import { afdelingerRoutes } from './routes/afdelingerRoutes.ts';
 import { buserRoutes } from './routes/buserRoutes.ts';
-import { carRoutes } from './routes/carRoutes.ts'; // Din nye, fejlfrie bil-router
+import { carRoutes } from './routes/carRoutes.ts'; 
 import { categoryRoutes } from './routes/categoryRoutes.ts';
 import { brandRoutes } from './routes/brandRoutes.ts';
+import { userRoutes } from './routes/userRoutes.ts';
+import { authRoutes } from './routes/authRoutes.ts';
 
 dotenv.config();
 
-const PORT = process.env.PORT || 3000; // Standardiseret til 3000 (eller hvad din .env siger)
+const PORT = process.env.PORT || 3000; 
 const app = express();
 
-// Middleware til at læse data sendt fra Postman (både JSON og Urlencoded)
+// Middleware til at læse JSON og urlencoded data fra Postman
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Globale ruter / Endpoints
+// Gamle/Globale ruter
 app.use('/', indexRoutes);
 app.use('/afdelinger', afdelingerRoutes);
 app.use('/buser', buserRoutes);
 
-// Dine nye Prisma-baserede API-ruter
+// Dine Prisma-baserede API-ruter
 app.use('/api/cars', carRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/brands', brandRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/login', authRoutes); // <-- RETTET: Nu lytter login-ruten på /api/login i stedet for /api/auth
 
 // Catch-all fejlhåndtering (Hvis ingen af de ovenstående ruter matcher)
 app.use((req: Request, res: Response) => {
